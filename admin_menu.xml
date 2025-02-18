@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu>
+    <submenu>
+        <menu link="index.php?option=com_whiteleafbooking" view="bookings" img="components/com_whiteleafbooking/assets/images/icon-16-article.png">
+            <?php echo JText::_('COM_WHITELEAFBOOKING_BOOKINGS'); ?>
+        </menu>
+        <menu link="index.php?option=com_whiteleafbooking&view=rooms" img="components/com_whiteleafbooking/assets/images/icon-16-article.png">
+            <?php echo JText::_('COM_WHITELEAFBOOKING_ROOMS'); ?>
+        </menu>
+        <menu link="index.php?option=com_whiteleafbooking&view=sampledata" img="components/com_whiteleafbooking/assets/images/icon-16-article.png">
+            <?php echo JText::_('COM_WHITELEAFBOOKING_SAMPLE_DATA'); ?>
+        </menu>
+    </submenu>
+</menu>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<access component="com_whiteleafbooking">
+    <section name="component">
+        <action name="core.admin" title="JGLOBAL_PERMISSIONS_COMPONENT_ADMIN" description="JGLOBAL_PERMISSIONS_COMPONENT_ADMIN_DESC" />
+        <action name="core.manage" title="JGLOBAL_PERMISSIONS_COMPONENT_MANAGE" description="JGLOBAL_PERMISSIONS_COMPONENT_MANAGE_DESC" />
+        <action name="core.create" title="JGLOBAL_PERMISSIONS_COMPONENT_CREATE" description="JGLOBAL_PERMISSIONS_COMPONENT_CREATE_DESC" />
+        <action name="core.delete" title="JGLOBAL_PERMISSIONS_COMPONENT_DELETE" description="JGLOBAL_PERMISSIONS_COMPONENT_DELETE_DESC" />
+        <action name="core.edit" title="JGLOBAL_PERMISSIONS_COMPONENT_EDIT" description="JGLOBAL_PERMISSIONS_COMPONENT_EDIT_DESC" />
+        <action name="core.edit.state" title="JGLOBAL_PERMISSIONS_COMPONENT_EDIT_STATE" description="JGLOBAL_PERMISSIONS_COMPONENT_EDIT_STATE_DESC" />
+        <action name="core.edit.own" title="JGLOBAL_PERMISSIONS_COMPONENT_EDIT_OWN" description="JGLOBAL_PERMISSIONS_COMPONENT_EDIT_OWN_DESC" />
+    </section>
+</access>
