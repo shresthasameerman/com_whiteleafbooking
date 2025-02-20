@@ -26,22 +26,19 @@ $saveOrder = $listOrder == 'a.ordering';
                         <?php echo HTMLHelper::_('grid.checkall'); ?>
                     </th>
                     <th class="title">
-                        <?php echo HTMLHelper::_('grid.sort', 'COM_WHITELEAFBOOKING_BOOKING_NUMBER', 'a.booking_number', $listDirn, $listOrder); ?>
+                        <?php echo HTMLHelper::_('grid.sort', 'BOOKING_NUMBER', 'a.booking_number', $listDirn, $listOrder); ?>
                     </th>
                     <th width="20%" class="nowrap hidden-phone">
-                        <?php echo HTMLHelper::_('grid.sort', 'COM_WHITELEAFBOOKING_GUEST_NAME', 'a.guest_name', $listDirn, $listOrder); ?>
+                        <?php echo HTMLHelper::_('grid.sort', 'GUEST_NAME', 'a.guest_name', $listDirn, $listOrder); ?>
                     </th>
                     <th width="15%" class="nowrap hidden-phone">
-                        <?php echo HTMLHelper::_('grid.sort', 'COM_WHITELEAFBOOKING_CHECK_IN', 'a.check_in', $listDirn, $listOrder); ?>
+                        <?php echo HTMLHelper::_('grid.sort', 'CHECK_IN', 'a.check_in', $listDirn, $listOrder); ?>
                     </th>
                     <th width="15%" class="nowrap hidden-phone">
-                        <?php echo HTMLHelper::_('grid.sort', 'COM_WHITELEAFBOOKING_CHECK_OUT', 'a.check_out', $listDirn, $listOrder); ?>
+                        <?php echo HTMLHelper::_('grid.sort', 'CHECK_OUT', 'a.check_out', $listDirn, $listOrder); ?>
                     </th>
                     <th width="1%" class="nowrap hidden-phone">
-                        <?php echo HTMLHelper::_('grid.sort', 'COM_WHITELEAFBOOKING_ID', 'a.id', $listDirn, $listOrder); ?>
-                    </th>
-                    <th width="5%" class="nowrap hidden-phone">
-                        <?php echo Text::_('COM_WHITELEAFBOOKING_ACTIONS'); ?>
+                        <?php echo HTMLHelper::_('grid.sort', 'BOOKING_ID', 'a.id', $listDirn, $listOrder); ?>
                     </th>
                 </tr>
             </thead>
@@ -68,15 +65,15 @@ $saveOrder = $listOrder == 'a.ordering';
                         <td class="hidden-phone">
                             <?php echo (int) $item->id; ?>
                         </td>
-                        <td class="hidden-phone">
-                            <button type="button" class="btn btn-danger" onclick="if(confirm('<?php echo Text::_('COM_WHITELEAFBOOKING_CONFIRM_DELETE'); ?>')){ document.adminForm.task.value='bookings.delete'; document.adminForm.submit(); }">
-                                <?php echo Text::_('JACTION_DELETE'); ?>
-                            </button>
-                        </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
+    </div>
+    <div class="form-actions">
+        <button type="button" class="btn btn-danger" onclick="if(confirm('<?php echo Text::_('COM_WHITELEAFBOOKING_CONFIRM_DELETE'); ?>')){ document.adminForm.task.value='bookings.delete'; document.adminForm.submit(); }">
+            <?php echo Text::_('JACTION_DELETE'); ?>
+        </button>
     </div>
     <input type="hidden" name="task" value="">
     <input type="hidden" name="boxchecked" value="0">
