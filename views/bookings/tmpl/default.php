@@ -32,10 +32,13 @@ $saveOrder = $listOrder == 'a.ordering';
                         <?php echo HTMLHelper::_('grid.sort', 'GUEST_NAME', 'a.guest_name', $listDirn, $listOrder); ?>
                     </th>
                     <th width="15%" class="nowrap hidden-phone">
-                        <?php echo HTMLHelper::_('grid.sort', 'CHECK_IN', 'a.check_in', $listDirn, $listOrder); ?>
+                        <?php echo HTMLHelper::_('grid.sort', 'GUEST_PHONE', 'a.guest_phone', $listDirn, $listOrder); ?>
                     </th>
                     <th width="15%" class="nowrap hidden-phone">
-                        <?php echo HTMLHelper::_('grid.sort', 'CHECK_OUT', 'a.check_out', $listDirn, $listOrder); ?>
+                        <?php echo HTMLHelper::_('grid.sort', 'BOOKING_CHECK_IN', 'a.check_in', $listDirn, $listOrder); ?>
+                    </th>
+                    <th width="15%" class="nowrap hidden-phone">
+                        <?php echo HTMLHelper::_('grid.sort', 'BOOKING_CHECK_OUT', 'a.check_out', $listDirn, $listOrder); ?>
                     </th>
                     <th width="1%" class="nowrap hidden-phone">
                         <?php echo HTMLHelper::_('grid.sort', 'BOOKING_ID', 'a.id', $listDirn, $listOrder); ?>
@@ -55,6 +58,9 @@ $saveOrder = $listOrder == 'a.ordering';
                         </td>
                         <td class="hidden-phone">
                             <?php echo $this->escape($item->guest_name); ?>
+                        </td>
+                        <td class="hidden-phone">
+                            <?php echo $this->escape($item->guest_phone); ?>
                         </td>
                         <td class="hidden-phone">
                             <?php echo HTMLHelper::_('date', $item->check_in, Text::_('DATE_FORMAT_LC4')); ?>
