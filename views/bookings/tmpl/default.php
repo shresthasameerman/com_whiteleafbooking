@@ -8,6 +8,7 @@ use Joomla\CMS\Router\Route;
 HTMLHelper::_('bootstrap.tooltip');
 HTMLHelper::_('behavior.multiselect');
 HTMLHelper::_('formbehavior.chosen', 'select');
+HTMLHelper::_('stylesheet', 'administrator/components/com_whiteleafbooking/assets/css/style.css');
 
 $user = JFactory::getUser();
 $userId = $user->get('id');
@@ -39,6 +40,9 @@ $saveOrder = $listOrder == 'a.ordering';
                     <th width="1%" class="nowrap hidden-phone">
                         <?php echo HTMLHelper::_('grid.sort', 'COM_WHITELEAFBOOKING_ID', 'a.id', $listDirn, $listOrder); ?>
                     </th>
+                    <th width="5%" class="nowrap hidden-phone">
+                        <?php echo Text::_('COM_WHITELEAFBOOKING_ACTIONS'); ?>
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -63,6 +67,11 @@ $saveOrder = $listOrder == 'a.ordering';
                         </td>
                         <td class="hidden-phone">
                             <?php echo (int) $item->id; ?>
+                        </td>
+                        <td class="hidden-phone">
+                            <button type="button" class="btn btn-danger" onclick="if(confirm('<?php echo Text::_('COM_WHITELEAFBOOKING_CONFIRM_DELETE'); ?>')){ document.adminForm.task.value='bookings.delete'; document.adminForm.submit(); }">
+                                <?php echo Text::_('JACTION_DELETE'); ?>
+                            </button>
                         </td>
                     </tr>
                 <?php endforeach; ?>

@@ -13,10 +13,10 @@
             <folder>tables</folder>
             <folder>views</folder>
             <folder>controllers</folder>
+            <folder>assets</folder> <!-- New asset folder -->
             <filename>access.xml</filename>
             <filename>config.xml</filename>
             <filename>whiteleafbooking.xml</filename>
-            <filename>sample_data.sql</filename>
         </files>
         <languages>
             <language tag="en-GB">language/en-GB/en-GB.com_whiteleafbooking.ini</language>
