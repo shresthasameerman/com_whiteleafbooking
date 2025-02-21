@@ -38,3 +38,56 @@
     background-color: #025aa5;
     border-color: #025aa5;
 }
+
+/* Payment Status Styling */
+.payment-status {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+.payment-status.pending {
+    background-color: #f0ad4e;
+    color: #fff;
+}
+
+.payment-status.paid {
+    background-color: #5cb85c;
+    color: #fff;
+}
+
+.payment-status.partial {
+    background-color: #5bc0de;
+    color: #fff;
+}
+
+.payment-status.refunded {
+    background-color: #777;
+    color: #fff;
+}
+
+.payment-status.failed {
+    background-color: #d9534f;
+    color: #fff;
+}
+
+.form-actions {
+    padding: 15px 0;
+    margin-top: 15px;
+    border-top: 1px solid #e5e5e5;
+}
+
+.input-group {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.input-group select {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.input-group-btn {
+    display: inline-block;
+}

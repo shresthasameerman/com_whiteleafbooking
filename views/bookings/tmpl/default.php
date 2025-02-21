@@ -40,6 +40,9 @@ $saveOrder = $listOrder == 'a.ordering';
                     <th width="15%" class="nowrap hidden-phone">
                         <?php echo HTMLHelper::_('grid.sort', 'BOOKING_CHECK_OUT', 'a.check_out', $listDirn, $listOrder); ?>
                     </th>
+                    <th width="15%" class="nowrap hidden-phone">
+                        <?php echo HTMLHelper::_('grid.sort', 'COM_WHITELEAFBOOKING_PAYMENT_STATUS', 'a.payment_status', $listDirn, $listOrder); ?>
+                    </th>
                     <th width="1%" class="nowrap hidden-phone">
                         <?php echo HTMLHelper::_('grid.sort', 'BOOKING_ID', 'a.id', $listDirn, $listOrder); ?>
                     </th>
@@ -69,6 +72,11 @@ $saveOrder = $listOrder == 'a.ordering';
                             <?php echo HTMLHelper::_('date', $item->check_out, Text::_('DATE_FORMAT_LC4')); ?>
                         </td>
                         <td class="hidden-phone">
+                            <span class="payment-status <?php echo strtolower($item->payment_status); ?>">
+                                <?php echo $this->escape($item->payment_status ?: 'Not Set'); ?>
+                            </span>
+                        </td>
+                        <td class="hidden-phone">
                             <?php echo (int) $item->id; ?>
                         </td>
                     </tr>
@@ -77,9 +85,30 @@ $saveOrder = $listOrder == 'a.ordering';
         </table>
     </div>
     <div class="form-actions">
-        <button type="button" class="btn btn-danger" onclick="if(confirm('<?php echo Text::_('COM_WHITELEAFBOOKING_CONFIRM_DELETE'); ?>')){ document.adminForm.task.value='bookings.delete'; document.adminForm.submit(); }">
-            <?php echo Text::_('JACTION_DELETE'); ?>
-        </button>
+        <div class="row-fluid">
+            <div class="span6">
+                <div class="input-group">
+                    <select name="payment_status" id="payment_status" class="form-control input-medium">
+                        <option value=""><?php echo Text::_('COM_WHITELEAFBOOKING_SELECT_PAYMENT_STATUS'); ?></option>
+                        <option value="Pending"><?php echo Text::_('COM_WHITELEAFBOOKING_PAYMENT_PENDING'); ?></option>
+                        <option value="Paid"><?php echo Text::_('COM_WHITELEAFBOOKING_PAYMENT_PAID'); ?></option>
+                        <option value="Partial"><?php echo Text::_('COM_WHITELEAFBOOKING_PAYMENT_PARTIAL'); ?></option>
+                        <option value="Refunded"><?php echo Text::_('COM_WHITELEAFBOOKING_PAYMENT_REFUNDED'); ?></option>
+                        <option value="Failed"><?php echo Text::_('COM_WHITELEAFBOOKING_PAYMENT_FAILED'); ?></option>
+                    </select>
+                    <div class="input-group-btn">
+                        <button type="button" class="btn btn-primary" onclick="Joomla.submitbutton('bookings.updatePaymentStatus')">
+                            <?php echo Text::_('COM_WHITELEAFBOOKING_UPDATE_PAYMENT_STATUS'); ?>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="span6 text-right">
+                <button type="button" class="btn btn-danger" onclick="if(confirm('<?php echo Text::_('COM_WHITELEAFBOOKING_CONFIRM_DELETE'); ?>')){ document.adminForm.task.value='bookings.delete'; document.adminForm.submit(); }">
+                    <?php echo Text::_('JACTION_DELETE'); ?>
+                </button>
+            </div>
+        </div>
     </div>
     <input type="hidden" name="task" value="">
     <input type="hidden" name="boxchecked" value="0">
