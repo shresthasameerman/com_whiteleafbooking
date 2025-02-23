@@ -92,9 +92,7 @@ $saveOrder = $listOrder == 'a.ordering';
                         <option value=""><?php echo Text::_('COM_WHITELEAFBOOKING_SELECT_PAYMENT_STATUS'); ?></option>
                         <option value="Pending"><?php echo Text::_('COM_WHITELEAFBOOKING_PAYMENT_PENDING'); ?></option>
                         <option value="Paid"><?php echo Text::_('COM_WHITELEAFBOOKING_PAYMENT_PAID'); ?></option>
-                        <option value="Partial"><?php echo Text::_('COM_WHITELEAFBOOKING_PAYMENT_PARTIAL'); ?></option>
                         <option value="Refunded"><?php echo Text::_('COM_WHITELEAFBOOKING_PAYMENT_REFUNDED'); ?></option>
-                        <option value="Failed"><?php echo Text::_('COM_WHITELEAFBOOKING_PAYMENT_FAILED'); ?></option>
                     </select>
                     <div class="input-group-btn">
                         <button type="button" class="btn btn-primary" onclick="Joomla.submitbutton('bookings.updatePaymentStatus')">
