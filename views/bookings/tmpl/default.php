@@ -15,7 +15,41 @@ $userId = $user->get('id');
 $listOrder = $this->escape($this->state->get('list.ordering'));
 $listDirn = $this->escape($this->state->get('list.direction'));
 $saveOrder = $listOrder == 'a.ordering';
+
+// Add JavaScript for special requests functionality
+JFactory::getDocument()->addScriptDeclaration('
+    function toggleSpecialRequests(element, content) {
+        var box = document.getElementById("special-requests-box");
+        var overlay = document.getElementById("overlay");
+        
+        if (box.style.display === "none" || box.style.display === "") {
+            box.style.display = "block";
+            overlay.style.display = "block";
+            box.querySelector(".content").innerHTML = content || "No special requests";
+            
+            var rect = element.getBoundingClientRect();
+            var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            box.style.top = (rect.bottom + scrollTop + 10) + "px";
+            box.style.left = rect.left + "px";
+        }
+    }
+    
+    function closeSpecialRequests() {
+        document.getElementById("special-requests-box").style.display = "none";
+        document.getElementById("overlay").style.display = "none";
+    }
+');
 ?>
+
+<div id="overlay" class="special-requests-overlay" onclick="closeSpecialRequests()"></div>
+<div id="special-requests-box" class="special-requests-box">
+    <div class="special-requests-header">
+        <span>Special Requests</span>
+        <button type="button" class="close-button" onclick="closeSpecialRequests()">&times;</button>
+    </div>
+    <div class="content"></div>
+</div>
 
 <form action="<?php echo Route::_('index.php?option=com_whiteleafbooking&view=bookings'); ?>" method="post" name="adminForm" id="adminForm">
     <div class="table-responsive">
@@ -42,6 +76,9 @@ $saveOrder = $listOrder == 'a.ordering';
                     </th>
                     <th width="15%" class="nowrap hidden-phone">
                         <?php echo HTMLHelper::_('grid.sort', 'COM_WHITELEAFBOOKING_PAYMENT_STATUS', 'a.payment_status', $listDirn, $listOrder); ?>
+                    </th>
+                    <th width="10%" class="nowrap hidden-phone">
+                        <?php echo Text::_('COM_WHITELEAFBOOKING_SPECIAL_REQUESTS'); ?>
                     </th>
                     <th width="1%" class="nowrap hidden-phone">
                         <?php echo HTMLHelper::_('grid.sort', 'BOOKING_ID', 'a.id', $listDirn, $listOrder); ?>
@@ -77,6 +114,15 @@ $saveOrder = $listOrder == 'a.ordering';
                             </span>
                         </td>
                         <td class="hidden-phone">
+                            <?php if (!empty($item->special_requests)): ?>
+                                <button type="button" class="btn btn-info btn-small" 
+                                        onclick="toggleSpecialRequests(this, '<?php echo $this->escape($item->special_requests); ?>')">
+                                    <span class="icon-eye"></span>
+                                    <?php echo Text::_('COM_WHITELEAFBOOKING_VIEW_REQUESTS'); ?>
+                                </button>
+                            <?php endif; ?>
+                        </td>
+                        <td class="hidden-phone">
                             <?php echo (int) $item->id; ?>
                         </td>
                     </tr>
@@ -87,18 +133,16 @@ $saveOrder = $listOrder == 'a.ordering';
     <div class="form-actions">
         <div class="row-fluid">
             <div class="span6">
-                <div class="input-group">
-                    <select name="payment_status" id="payment_status" class="form-control input-medium">
+                <div class="payment-status-group">
+                    <select name="payment_status" id="payment_status" class="form-control">
                         <option value=""><?php echo Text::_('COM_WHITELEAFBOOKING_SELECT_PAYMENT_STATUS'); ?></option>
                         <option value="Pending"><?php echo Text::_('COM_WHITELEAFBOOKING_PAYMENT_PENDING'); ?></option>
                         <option value="Paid"><?php echo Text::_('COM_WHITELEAFBOOKING_PAYMENT_PAID'); ?></option>
-                        <option value="Refunded"><?php echo Text::_('COM_WHITELEAFBOOKING_PAYMENT_REFUNDED'); ?></option>
+                        <option value="R"><?php echo Text::_('COM_WHITELEAFBOOKING_PAYMENT_REFUNDED'); ?></option>
                     </select>
-                    <div class="input-group-btn">
-                        <button type="button" class="btn btn-primary" onclick="Joomla.submitbutton('bookings.updatePaymentStatus')">
-                            <?php echo Text::_('COM_WHITELEAFBOOKING_UPDATE_PAYMENT_STATUS'); ?>
-                        </button>
-                    </div>
+                    <button type="button" class="btn btn-primary" onclick="Joomla.submitbutton('bookings.updatePaymentStatus')">
+                        <?php echo Text::_('COM_WHITELEAFBOOKING_UPDATE_PAYMENT_STATUS'); ?>
+                    </button>
                 </div>
             </div>
             <div class="span6 text-right">
