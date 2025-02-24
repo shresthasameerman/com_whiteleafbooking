@@ -8,7 +8,7 @@ use Joomla\CMS\Router\Route;
 HTMLHelper::_('bootstrap.tooltip');
 HTMLHelper::_('behavior.multiselect');
 HTMLHelper::_('formbehavior.chosen', 'select');
-HTMLHelper::_('stylesheet', 'administrator/components/com_whiteleafbooking/assets/css/style.css');
+HTMLHelper::_('stylesheet', 'administrator/components/com_whiteleafbooking/assets/css/style.css', array('version' => 'auto', 'relative' => true));
 
 $user = JFactory::getUser();
 $userId = $user->get('id');
@@ -22,22 +22,36 @@ JFactory::getDocument()->addScriptDeclaration('
         var box = document.getElementById("special-requests-box");
         var overlay = document.getElementById("overlay");
         
-        if (box.style.display === "none" || box.style.display === "") {
-            box.style.display = "block";
-            overlay.style.display = "block";
-            box.querySelector(".content").innerHTML = content || "No special requests";
-            
-            var rect = element.getBoundingClientRect();
-            var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            
-            box.style.top = (rect.bottom + scrollTop + 10) + "px";
-            box.style.left = rect.left + "px";
+        if (box && overlay) {
+            if (box.style.display === "none" || box.style.display === "") {
+                // Show modal and overlay
+                box.style.display = "block";
+                overlay.style.display = "block";
+                
+                // Update content
+                var contentDiv = box.querySelector(".content");
+                if (contentDiv) {
+                    contentDiv.textContent = content || "No special requests";
+                }
+                
+                // Prevent background scrolling
+                document.body.style.overflow = "hidden";
+            }
         }
     }
     
     function closeSpecialRequests() {
-        document.getElementById("special-requests-box").style.display = "none";
-        document.getElementById("overlay").style.display = "none";
+        var box = document.getElementById("special-requests-box");
+        var overlay = document.getElementById("overlay");
+        
+        if (box && overlay) {
+            // Hide modal and overlay
+            box.style.display = "none";
+            overlay.style.display = "none";
+            
+            // Restore background scrolling
+            document.body.style.overflow = "auto";
+        }
     }
 ');
 ?>
@@ -115,8 +129,12 @@ JFactory::getDocument()->addScriptDeclaration('
                         </td>
                         <td class="hidden-phone">
                             <?php if (!empty($item->special_requests)): ?>
+                                <!-- Debug output -->
+                                <pre style="display:none;">
+                                    <?php print_r($item->special_requests); ?>
+                                </pre>
                                 <button type="button" class="btn btn-info btn-small" 
-                                        onclick="toggleSpecialRequests(this, '<?php echo $this->escape($item->special_requests); ?>')">
+                                        onclick="toggleSpecialRequests(this, <?php echo htmlspecialchars(json_encode($item->special_requests), ENT_QUOTES, 'UTF-8'); ?>)">
                                     <span class="icon-eye"></span>
                                     <?php echo Text::_('COM_WHITELEAFBOOKING_VIEW_REQUESTS'); ?>
                                 </button>

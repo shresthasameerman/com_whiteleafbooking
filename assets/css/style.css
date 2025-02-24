@@ -118,6 +118,7 @@
     display: inline-block;
 }
 
+/* Modal and Overlay Styling */
 .special-requests-overlay {
     display: none;
     position: fixed;
@@ -126,42 +127,99 @@
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
+    z-index: 1050; /* Increased z-index */
+    backdrop-filter: blur(2px);
 }
 
 .special-requests-box {
     display: none;
-    position: absolute;
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    z-index: 1001;
-    min-width: 300px;
+    position: fixed;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1051; /* Increased z-index */
+    width: 90%;
     max-width: 500px;
+    max-height: 80vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .special-requests-header {
-    padding: 10px 15px;
-    border-bottom: 1px solid #ddd;
+    padding: 15px 20px;
+    background: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #f5f5f5;
+    border-radius: 8px 8px 0 0;
 }
 
-.special-requests-box .content {
-    padding: 15px;
-    max-height: 300px;
-    overflow-y: auto;
+.special-requests-header span {
+    font-size: 1.2em;
+    font-weight: 600;
+    color: #1a1a1a;
+    letter-spacing: 0.01em;
 }
 
 .close-button {
     background: none;
     border: none;
-    font-size: 20px;
+    font-size: 24px;
     cursor: pointer;
     padding: 0 5px;
+    color: #444;
+    transition: color 0.2s;
+}
+
+.close-button:hover {
+    color: #000;
+}
+
+/* Ensure content is visible */
+.special-requests-box .content {
+    padding: 20px;
+    max-height: calc(80vh - 70px);
+    overflow-y: auto;
+    line-height: 1.6;
+    color: #000; /* Changed to black for better visibility */
+    font-size: 15px;
+    background: #ffffff; /* Explicitly set background */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+.special-requests-box .content:empty::before {
+    content: "No special requests";
+    color: #666;
+    font-style: italic;
+}
+
+.special-requests-box .content::selection {
+    background: #b3d4fc;
+    color: #000;
+}
+
+/* Scrollbar Styling */
+.special-requests-box .content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.special-requests-box .content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.special-requests-box .content::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+.special-requests-box .content::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
 
 .payment-status-group {

@@ -2,7 +2,7 @@
 <extension type="component" version="3.9" method="upgrade">
     <name>White Leaf Booking</name>
     <author>shresthasameerman</author>
-    <version>1.0.20</version>
+    <version>1.0.30</version>
     <description>Component for managing bookings at White Leaf Resort</description>
     <administration>
         <menu>White Leaf Booking</menu>
