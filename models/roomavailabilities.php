@@ -3,25 +3,23 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\MVC\Model\ListModel;
 
-class WhiteleafBookingModelRooms extends ListModel
+class WhiteleafBookingModelRoomavailabilities extends ListModel
 {
     protected function getListQuery()
     {
         $db = $this->getDbo();
         $query = $db->getQuery(true)
-            ->select('*')
-            ->from($db->quoteName('dwiwb_whiteleaf_rooms'));
+            ->select('a.*')
+            ->from($db->quoteName('dwiwb_whiteleaf_room_availability', 'a'));
+            
+        // Add the list ordering clause
+        $orderCol = $this->state->get('list.ordering', 'a.id');
+        $orderDirn = $this->state->get('list.direction', 'ASC');
+        $query->order($db->escape($orderCol . ' ' . $orderDirn));
 
         return $query;
     }
     
-    /**
-     * Delete rooms
-     *
-     * @param   array  $ids  An array of record IDs.
-     *
-     * @return  boolean  True on success
-     */
     public function delete($ids)
     {
         $db = $this->getDbo();
@@ -31,7 +29,7 @@ class WhiteleafBookingModelRooms extends ListModel
 
         $ids = array_map('intval', $ids); // Ensure IDs are integers
         $query = $db->getQuery(true)
-            ->delete($db->quoteName('dwiwb_whiteleaf_rooms'))
+            ->delete($db->quoteName('dwiwb_whiteleaf_room_availability'))
             ->where($db->quoteName('id') . ' IN (' . implode(',', $ids) . ')');
 
         $db->setQuery($query);

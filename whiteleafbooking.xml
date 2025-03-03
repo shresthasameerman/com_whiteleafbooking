@@ -2,7 +2,7 @@
 <extension type="component" version="3.9" method="upgrade">
     <name>White Leaf Booking</name>
     <author>shresthasameerman</author>
-    <version>1.0.30</version>
+    <version>1.0.50</version>
     <description>Component for managing bookings at White Leaf Resort</description>
     <administration>
         <menu>White Leaf Booking</menu>
@@ -14,6 +14,7 @@
             <folder>views</folder>
             <folder>controllers</folder>
             <folder>assets</folder> <!-- New asset folder -->
+            <folder>sql</folder>
             <filename>access.xml</filename>
             <filename>config.xml</filename>
             <filename>whiteleafbooking.xml</filename>

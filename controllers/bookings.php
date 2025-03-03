@@ -55,4 +55,10 @@ class WhiteleafBookingControllerBookings extends BaseController
         // Redirect back to the bookings view
         $this->setRedirect(JRoute::_('index.php?option=com_whiteleafbooking&view=bookings', false));
     }
+
+    public function roomAvailability()
+    {
+        // Redirect to room availability view
+        $this->setRedirect(JRoute::_('index.php?option=com_whiteleafbooking&view=roomavailability', false));
+    }
 }

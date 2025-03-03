@@ -8,6 +8,7 @@ use Joomla\CMS\Router\Route;
 HTMLHelper::_('bootstrap.tooltip');
 HTMLHelper::_('behavior.multiselect');
 HTMLHelper::_('formbehavior.chosen', 'select');
+HTMLHelper::_('stylesheet', 'administrator/components/com_whiteleafbooking/assets/css/style.css', array('version' => 'auto', 'relative' => true));
 
 $user = JFactory::getUser();
 $userId = $user->get('id');
@@ -36,6 +37,9 @@ $saveOrder = $listOrder == 'a.ordering';
                     <th width="15%" class="nowrap hidden-phone">
                         <?php echo HTMLHelper::_('grid.sort', 'COM_WHITELEAFBOOKING_PRICE', 'a.price', $listDirn, $listOrder); ?>
                     </th>
+                    <th width="15%" class="nowrap hidden-phone">
+                        <?php echo HTMLHelper::_('grid.sort', 'COM_WHITELEAFBOOKING_AVAILABILITY', 'a.available', $listDirn, $listOrder); ?>
+                    </th>
                     <th width="1%" class="nowrap hidden-phone">
                         <?php echo HTMLHelper::_('grid.sort', 'COM_WHITELEAFBOOKING_ID', 'a.id', $listDirn, $listOrder); ?>
                     </th>
@@ -62,12 +66,33 @@ $saveOrder = $listOrder == 'a.ordering';
                             <?php echo $this->escape($item->price); ?>
                         </td>
                         <td class="hidden-phone">
+                            <span class="payment-status <?php echo (!empty($item->available) && $item->available == 1) ? 'c' : 'p'; ?>">
+                                <?php echo (!empty($item->available) && $item->available == 1) ? 'Available' : 'Unavailable'; ?>
+                            </span>
+                        </td>
+                        <td class="hidden-phone">
                             <?php echo (int) $item->id; ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
+    </div>
+    <div class="form-actions">
+        <div class="row-fluid">
+            <div class="span6">
+                <button type="button" class="btn btn-primary" onclick="Joomla.submitbutton('room.add')">
+                    <span class="icon-new icon-white"></span>
+                    <?php echo Text::_('JTOOLBAR_NEW'); ?>
+                </button>
+            </div>
+            <div class="span6 text-right">
+                <button type="button" class="btn btn-danger" onclick="if(confirm('<?php echo Text::_('COM_WHITELEAFBOOKING_CONFIRM_DELETE_ROOMS'); ?>')){ Joomla.submitbutton('rooms.delete'); }">
+                    <span class="icon-delete"></span>
+                    <?php echo Text::_('JTOOLBAR_DELETE'); ?>
+                </button>
+            </div>
+        </div>
     </div>
     <input type="hidden" name="task" value="">
     <input type="hidden" name="boxchecked" value="0">
